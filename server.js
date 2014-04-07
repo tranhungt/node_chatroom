@@ -2,6 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
+var chatServer = require('./lib/chat_server')
 var cache = {};
 
 function send404(res){
@@ -40,6 +41,8 @@ function serveStatic(res, cache, absPath){
 }
 
 var server = http.createServer();
+chatServer.listen(server);
+
 server.on('request', function(req, res){
   var filePath = false;
   if (req.url == '/'){
